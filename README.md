@@ -36,12 +36,15 @@ $ npm install
 
 ```bash
 # development
+$ export NODE_ENV=dev
 $ npm run start
 
 # watch mode
+$ export NODE_ENV=dev
 $ npm run start:dev
 
 # production mode
+$ export NODE_ENV=prod
 $ npm run start:prod
 ```
 
