@@ -12,5 +12,4 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, BaseResponse<T
                 data: data,
             })));
     }
-
 }
