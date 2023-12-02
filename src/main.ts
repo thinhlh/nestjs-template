@@ -1,8 +1,9 @@
 import { NestFactory, Reflector } from "@nestjs/core";
-import { AppModule } from "./app/app.module";
 import { ClassSerializerInterceptor, INestApplication, ValidationPipe, VersioningType } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { CustomExceptionFilter } from "./config/filters/exception.filter";
+import { BaseResponse } from "./config/dto/base.response";
+import { AppModule } from "./app/app.module";
 
 
 const createApp = () => NestFactory.create(AppModule);
