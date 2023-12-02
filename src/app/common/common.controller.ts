@@ -1,9 +1,10 @@
 import { Controller, Get } from "@nestjs/common";
+import { BaseResponse } from "src/config/dto/base.response";
 
 @Controller()
 export class CommonController {
   @Get("/")
   async ping() {
-    return "Hello";
+    return BaseResponse.success("Hello");
   }
 }
