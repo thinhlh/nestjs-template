@@ -5,7 +5,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'unused-imports'],
   extends: [
     'plugin:@typescript-eslint/recommended',
   ],
@@ -24,6 +24,7 @@ module.exports = {
 
     'quotes': ['error', 'double'],
     "semi": ["error", "always"],
-    'eol-last': ['error', 'always']
+    'eol-last': ['error', 'always'],
+    "unused-imports/no-unused-imports": "error",
   },
 };

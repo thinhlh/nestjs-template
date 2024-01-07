@@ -1,8 +1,6 @@
-import { NestFactory, Reflector } from "@nestjs/core";
-import { ClassSerializerInterceptor, INestApplication, ValidationPipe, VersioningType } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { INestApplication, VersioningType } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { CustomExceptionFilter } from "./config/filters/exception.filter";
-import { BaseResponse } from "./config/dto/base.response";
 import { AppModule } from "./app/app.module";
 
 
@@ -17,19 +15,6 @@ async function configApp(app: INestApplication) {
 
   app.setGlobalPrefix("/api");
   app.enableVersioning({ type: VersioningType.URI, defaultVersion: "1" });
-
-  app.useGlobalFilters(new CustomExceptionFilter());
-  app.useGlobalInterceptors(
-    // new ResponseInterceptor(),
-    new ClassSerializerInterceptor(new Reflector(), {}),
-  );
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true, // automatically transform request fields to desired type
-    }),
-  );
 }
 
 async function documentingApp(app: INestApplication) {

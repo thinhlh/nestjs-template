@@ -8,13 +8,13 @@ export class BaseResponse<T> {
   success: boolean;
 
   @ApiProperty({
-    description: "Error message. Will be null if there is no error"
+    description: "Error message. Will be null if there is no error",
   })
   message?: string;
 
-  // @ApiProperty({
-  //   description: "Results of the request."
-  // })
+  @ApiProperty({
+    description: "Results of the request",
+  })
   data?: T;
 
   constructor(success: boolean, message?: string, data?: T) {

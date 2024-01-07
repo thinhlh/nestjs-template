@@ -23,6 +23,8 @@ export class CustomExceptionFilter implements ExceptionFilter {
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = "Internal Server Error!";
 
+    console.log(exception);
+
     switch (exception.constructor) {
       case NotFoundException:
         const response = (exception as NotFoundException).getResponse();
