@@ -1,12 +1,15 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Product } from "./product";
-import { CreateProductRequestDTO } from "./create-product-request.dto";
+import { CreateProductRequest } from "./create-product.request";
 import { ApiBaseResponse } from "src/app/decorators/api-base-response.decorator";
+import { ProductService } from "./product.service";
 
-@Controller("/product")
+@Controller("/products")
 @ApiTags("Product")
 export class ProductController {
+
+  constructor(private readonly productService: ProductService) { }
 
   @Get("/")
   @ApiBaseResponse(Product)
@@ -28,10 +31,7 @@ export class ProductController {
   @ApiOperation({
     summary: "Create product"
   })
-  async createProduct(@Body() createProductRequestDTO: CreateProductRequestDTO): Promise<Product> {
-    return ({
-      id: "2",
-      ...createProductRequestDTO
-    });
+  async createProduct(@Body() createProductRequestDTO: CreateProductRequest): Promise<Product> {
+    return this.productService.createProduct(createProductRequestDTO);
   }
 }
