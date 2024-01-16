@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post } from "@nestjs/commo
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Product } from "./product";
 import { CreateProductRequest } from "./create-product.request";
-import { ApiBaseResponse } from "src/app/decorators/api-base-response.decorator";
+import { ApiBaseResponse } from "src/shared/decorators/api-base-response.decorator";
 import { ProductService } from "./product.service";
 
 @Controller("/products")

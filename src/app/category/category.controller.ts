@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { ApiBaseResponse } from "../decorators/api-base-response.decorator";
+import { ApiBaseResponse } from "../../shared/decorators/api-base-response.decorator";
 import { Category } from "./category";
 import { BaseResponse } from "src/config/dto/base.response";
 import { CategoryService } from "./category.service";

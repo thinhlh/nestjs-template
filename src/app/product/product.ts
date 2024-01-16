@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, Min } from "class-validator";
 import { Category } from "src/app/category/category";
-import { BaseEntity } from "src/shared/base-entity";
+import { BaseEntity } from "src/shared/kernel/domain/base-entity";
 import { Column, Entity, Index, ManyToOne } from "typeorm";
 
 @Entity()

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Product } from "src/app/product/product";
-import { BaseEntity } from "src/shared/base-entity";
+import { BaseEntity } from "src/shared/kernel/domain/base-entity";
 import { Column, Entity, Index, OneToMany } from "typeorm";
 
 @Entity()
