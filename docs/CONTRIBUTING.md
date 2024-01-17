@@ -56,7 +56,7 @@ Valid types are:
 - **perf:** A code change that improves performance
 - **test:** Adding missing or correcting existing tests
 - **chore:** Changes to the build process or auxiliary tools and libraries such as documentation generation
-- **ci:** Reserved to CI bot commits
+- **ci:** CI/CD changes
 
 ##### Scope
 

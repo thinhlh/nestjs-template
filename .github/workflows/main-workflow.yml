@@ -11,4 +11,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19
-      - run: yarn install --immutable
+      - run: yarn --frozen-lockfile
+      - name: Linting
+        run: yarn lint
+      - name: Test
+        run: yarn test
