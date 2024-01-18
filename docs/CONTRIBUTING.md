@@ -27,9 +27,9 @@ Commits should follow the [Conventional Commits](https://www.conventionalcommits
 Each commit message consists of a **header**, an optional **body** and an optional **footer**. The header has a special format that includes a **type**, an optional **scope** and a **subject**:
 
 ### Semantic commit message
-
+Refers to this file to update commit pattern [commit-msg](/.husky/commit-msg)
 ```
-[optional scope]<type>: <description>
+[scope?]<type>: <description>
 
 [optional body]
 
@@ -37,6 +37,7 @@ Each commit message consists of a **header**, an optional **body** and an option
 
 # Example
 [TNT-0000]docs: add contributing documentation
+docs: add contributing documentation
 ```
 
 #### Header

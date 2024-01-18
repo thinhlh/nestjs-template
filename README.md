@@ -8,6 +8,8 @@
   - Built-in swagger documentation for base response
   - Universial exception handler
   - Database connection module
+  - Commithook
+  - Commitlint
 - Todo items
   - Database migration
   - CI/CD pipeline

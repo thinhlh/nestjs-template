@@ -1,4 +1,19 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx --no -- commitlint --edit ${1}
+PATTERN="^(\[(JIRA|TICKET_REF)\-[0-9]+\])?(feat|fix|docs|style|refactor|perf|test|chore|ci):\s(\w|\s)+$"
+
+echo "commit lint validate job starts"
+
+COMMIT_MESSAGE=$(<${1})
+
+echo $COMMIT_MESSAGE
+
+if [[ $( echo $COMMIT_MESSAGE | grep -E $PATTERN | wc -l) -eq 1 ]]
+then
+    echo "Valid commit format" 
+    exit 0
+else 
+    echo "Invalid commit format"
+    exit 1
+fi
