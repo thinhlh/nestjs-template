@@ -1,8 +1,12 @@
 import { Type, applyDecorators } from "@nestjs/common";
-import { ApiExtraModels, ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
+import { ApiExtraModels, ApiResponse, ApiResponseOptions, getSchemaPath } from "@nestjs/swagger";
 import { BaseResponse } from "src/shared/kernel/dto/base.response";
 
-export const ApiBaseResponse = <T extends Type<any>>(data?: T | [T]) => {
+type ApiBaseResponseProps<T extends Type<any>> = ApiResponseOptions & {
+  format?: T | [T]
+}
+
+export const ApiBaseResponse = <T extends Type<any>>({ format, ...props }: ApiBaseResponseProps<T>) => {
 
   const getTypeAndRefOfSchema = (data: T) => {
     const typeName = data.name.toLowerCase();
@@ -14,11 +18,12 @@ export const ApiBaseResponse = <T extends Type<any>>(data?: T | [T]) => {
     return { type, ref };
   };
 
-  if (Array.isArray(data)) {
-    const { type, ref } = getTypeAndRefOfSchema(data[0]);
+  if (Array.isArray(format)) {
+    const { type, ref } = getTypeAndRefOfSchema(format[0]);
     return applyDecorators(
-      ApiExtraModels(BaseResponse, data[0]),
-      ApiOkResponse({
+      ApiExtraModels(BaseResponse, format[0]),
+      ApiResponse({
+        ...props,
         schema: {
           allOf: [
             { $ref: getSchemaPath(BaseResponse) },
@@ -35,14 +40,14 @@ export const ApiBaseResponse = <T extends Type<any>>(data?: T | [T]) => {
             },
           ],
         },
-      }),
+      })
     );
   } else {
-    const { type, ref } = getTypeAndRefOfSchema(data);
+    const { type, ref } = getTypeAndRefOfSchema(format);
 
     return applyDecorators(
-      ApiExtraModels(BaseResponse, data),
-      ApiOkResponse({
+      ApiExtraModels(BaseResponse, format),
+      ApiResponse({
         schema: {
           allOf: [
             { $ref: getSchemaPath(BaseResponse) },

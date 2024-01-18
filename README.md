@@ -35,6 +35,7 @@ yarn run typeorm:migration:revert # Revert migration 1 step back
 - [ ] BaseModule, BaseCRUD
 - [ ] Pagination
 - [ ] Locking mechanism
+- [ ] Feature flag
 - [ ] HttpServices
 - [ ] Auth
 - [ ] Logging, Tracing & Monitoring

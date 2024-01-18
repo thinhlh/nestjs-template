@@ -18,10 +18,10 @@ export class CategoryController {
   @ApiOperation({
     summary: "Get categories"
   })
-  @ApiResponse({
+  @ApiBaseResponse({
+    format: [Category],
     status: HttpStatus.OK
   })
-  @ApiBaseResponse([Category])
   async getCategories(): Promise<BaseResponse<Category[]>> {
     const categories = await this.categoryService.getCategories();
     return BaseResponse.success(categories);
@@ -33,6 +33,9 @@ export class CategoryController {
   })
   @ApiResponse({
     status: HttpStatus.OK
+  })
+  @ApiBaseResponse({
+    format: Category
   })
   async createCategory(@Body() createCategoryRequest: CreateCategoryRequest): Promise<BaseResponse<Category>> {
     const category = await this.categoryService.createCategory(createCategoryRequest);

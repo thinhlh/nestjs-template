@@ -4,6 +4,7 @@ import { Product } from "./product.entity";
 import { CreateProductRequest } from "./create-product.request";
 import { ApiBaseResponse } from "src/shared/decorators/api-base-response.decorator";
 import { ProductService } from "./product.service";
+import { BaseResponse } from "src/shared/kernel/dto/base.response";
 
 @Controller("/products")
 @ApiTags("Product")
@@ -12,14 +13,18 @@ export class ProductController {
   constructor(private readonly productService: ProductService) { }
 
   @Get("/")
-  @ApiBaseResponse(Product)
-  async getProducts(): Promise<Product[]> {
-    return [];
+  @ApiBaseResponse({
+    format: [Product]
+  })
+  async getProducts(): Promise<BaseResponse<Product[]>> {
+    return BaseResponse.success([]);
   }
 
   @Post("/")
   @HttpCode(HttpStatus.OK)
-  @ApiBaseResponse(Product)
+  @ApiBaseResponse({
+    format: Product
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: "Product created"
@@ -31,7 +36,9 @@ export class ProductController {
   @ApiOperation({
     summary: "Create product"
   })
-  async createProduct(@Body() createProductRequestDTO: CreateProductRequest): Promise<Product> {
-    return this.productService.createProduct(createProductRequestDTO);
+  async createProduct(@Body() createProductRequestDTO: CreateProductRequest): Promise<BaseResponse<Product>> {
+    const result = await this.productService.createProduct(createProductRequestDTO);
+
+    return BaseResponse.success(result);
   }
 }

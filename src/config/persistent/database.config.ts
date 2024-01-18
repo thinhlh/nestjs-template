@@ -1,6 +1,7 @@
 import { registerAs } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { ConfigConstants } from "../config.constants";
+import { EnvironmentType } from "src/shared/environment/environment";
 
 
 export default registerAs(ConfigConstants.DATABASE, (): TypeOrmModuleOptions => {
@@ -12,15 +13,13 @@ export default registerAs(ConfigConstants.DATABASE, (): TypeOrmModuleOptions => 
         port: +process.env.DATABASE_PORT,
         type: "postgres",
 
-        dropSchema: false,
-        autoLoadEntities: true,
-        entities: ["src/**/*.entity.ts"],
-        // synchronize: process.env.NODE_ENV === EnvironmentType.DEV,
-        synchronize: false,
-
         logging: ["query", "error"],
 
+        dropSchema: false,
+        autoLoadEntities: true,
+        entities: ["dist/src/**/*.entity.ts"],
+        synchronize: process.env.NODE_ENV === EnvironmentType.DEV,
         migrationsTableName: "migrations",
-        migrations: ["src/migrations/*{.ts,.js}"],
+        migrations: ["dist/migrations/*{.ts,.js}"],
     };
 });
