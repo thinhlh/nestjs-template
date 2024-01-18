@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, Min } from "class-validator";
-import { Category } from "src/app/category/category";
-import { BaseEntity } from "src/shared/kernel/domain/base-entity";
 import { Column, Entity, Index, ManyToOne } from "typeorm";
+import { Category } from "../category/category.entity";
+import { BaseEntity } from "../../shared/kernel/domain/base-entity";
 
 @Entity()
 export class Product extends BaseEntity {
@@ -21,4 +21,10 @@ export class Product extends BaseEntity {
     nullable: false
   })
   category: Category;
+
+  @Column({
+    nullable: false,
+    default: false,
+  })
+  sample: boolean;
 }

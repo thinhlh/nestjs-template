@@ -1,6 +1,6 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from "@nestjs/common";
 import { map, Observable } from "rxjs";
-import { BaseResponse } from "../kernel/dto/base.response";
+import { BaseResponse } from "../../shared/kernel/dto/base.response";
 
 export class ResponseInterceptor<T>
   implements NestInterceptor<T, BaseResponse<T>> {

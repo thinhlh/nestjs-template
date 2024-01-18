@@ -11,7 +11,8 @@ import { classToPlain } from "class-transformer";
 import { isArray, isObject } from "class-validator";
 import { Request, Response } from "express";
 import { QueryFailedError, TypeORMError } from "typeorm";
-import { BaseResponse } from "../kernel/dto/base.response";
+import { BaseResponse } from "../../shared/kernel/dto/base.response";
+import { AppException } from "src/shared/exceptions/app-exception";
 
 @Catch()
 export class CustomExceptionFilter implements ExceptionFilter {
@@ -26,6 +27,12 @@ export class CustomExceptionFilter implements ExceptionFilter {
     console.log(exception);
 
     switch (exception.constructor) {
+      case AppException: 
+        message = (exception as AppException).getResponse().toString();
+        status = (exception as AppException).getStatus();
+
+        break;
+
       case NotFoundException:
         const response = (exception as NotFoundException).getResponse();
 
@@ -56,10 +63,8 @@ export class CustomExceptionFilter implements ExceptionFilter {
         }
         break;
       case HttpException:
-        status = exception.getStatus()
-          ? exception.getStatus()
-          : HttpStatus.INTERNAL_SERVER_ERROR;
-        message = (exception as HttpException).message;
+        status = (exception as HttpException).getStatus();
+        message = exception.message;
         break;
       case TypeORMError:
         status = HttpStatus.BAD_REQUEST;

@@ -1,44 +1,47 @@
 # NestJS Template
 > A production ready NestJS template with Domain Driven Design architecture and CQRS & predefined configurations
 
-# Table of contents
-- Features
-  - Environement configuration
-  - Base response
-  - Built-in swagger documentation for base response
-  - Universial exception handler
-  - Database connection module
-  - Commithook
-  - Commitlint
-- Todo items
-  - Database migration
-  - CI/CD pipeline
-  - CQRS
-  - Domain Driven architecture
-  - Logging, Tracing & Monitoring
-  - Deployment
-
 # Features
 - [Environment configuration](#environment-configuration)
 - [Built in exception filter](#built-in-exception-filter)
 - [Base RestAPI response](#base-universial-restapi-response-with-openapi-support)
 - [SQL database connection](#sql-database-connection-with-typeorm)
+- [Commithook & commitlint](#commithook--commitlint)
+- [Error handling](#error-handling)
+- [Database migration](#database-migration)
 
 ## Environment configuration
 ## Built-in exception filter
 ## Base universial RestAPI response with OpenAPI support
 ## SQL Database connection with TypeORM
+## Commithook & commitlint
+## Error handling
+## Database migration
+```sh
+yarn run typeorm:migration:generate ./src/migrations/MigrationChanges # Generate migration file
+
+yarn run typeorm:migration:run # Run pending migrations files
+
+yarn run typeorm:migration:revert # Revert migration 1 step back
+```
 
 
 # TODO items
-- [ ] Database migration
+- [x] Database migration
+- [x] Business Error handling
 - [ ] CI/CD pipeline
 - [ ] CQRS
 - [ ] Domain Driven architecture
+- [ ] BaseModule, BaseCRUD
+- [ ] Pagination
+- [ ] Locking mechanism
+- [ ] HttpServices
+- [ ] Auth
 - [ ] Logging, Tracing & Monitoring
 - [ ] Deployment
 - [ ] Microservices
 - [ ] Caching
-- [ ] Message queue implementation
+- [ ] MessageQueue
+- [ ] GraphQL
 - [ ] Monorepo
 - [ ] High-level application architecture

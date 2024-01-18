@@ -1,63 +1,38 @@
-import { ClassSerializerInterceptor, Module, ValidationPipe } from "@nestjs/common";
+import { Module } from "@nestjs/common";
+import { environmentSchema } from "src/shared/environment/environment";
+import { ConfigModule } from "@nestjs/config";
 import { CommonModule } from "./common/common.module";
-import { Environment, EnvironmentType, environmentSchema } from "src/shared/environment/environment";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
-import { CustomExceptionFilter } from "src/shared/filters/exception.filter";
-import { ProductModule } from "src/app/product/product.module";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { ProductModule } from "./product/product.module";
 import { CategoryModule } from "./category/category.module";
+import { DatabaseModule } from "src/config/persistent/database.module";
+import { appFilterProviders } from "src/config/filters/app-filter.providers";
+import { appInterceptorProviders } from "src/config/interceptors/app-interceptor.providers";
+import { appPipeProviders } from "src/config/pipes/app-pipe.providers";
+import databaseConfig from "src/config/persistent/database.config";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `./env/.${process.env.NODE_ENV}.env`,
+      ignoreEnvFile: process.env.NODE_ENV !== "dev",
       validationSchema: environmentSchema,
       validationOptions: {
         allowUnknown: true,
         abortEarly: true,
       },
+      load: [databaseConfig]
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService<Environment>) => ({
-        host: configService.get("DATABASE_HOST"),
-        username: configService.get("DATABASE_USER"),
-        password: configService.get("DATABASE_PASSWORD"),
-        database: configService.get("DATABASE_NAME"),
-        port: configService.get("DATABASE_PORT"),
-        type: "postgres",
 
-        autoLoadEntities: true,
-        synchronize: configService.get("NODE_ENV") === EnvironmentType.DEV,
-        logging: ["query", "error"]
-      }),
-    }),
+    DatabaseModule,
     CommonModule,
     ProductModule,
     CategoryModule,
   ],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: CustomExceptionFilter
-    },
-    {
-      provide: APP_PIPE,
-      useFactory: () => {
-        return new ValidationPipe({
-          whitelist: true,
-          forbidNonWhitelisted: true, // Throw error if unexpected property appears
-          transform: true, // automatically transform request fields to desired type
-        });
-      }
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ClassSerializerInterceptor
-    }
+    ...appFilterProviders,
+    ...appInterceptorProviders,
+    ...appPipeProviders
   ]
 })
 export class AppModule { }
