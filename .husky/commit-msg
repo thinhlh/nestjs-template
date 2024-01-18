@@ -1,19 +1,22 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-PATTERN="^(\[(JIRA|TICKET_REF)\-[0-9]+\])?(feat|fix|docs|style|refactor|perf|test|chore|ci):\s(\w|\s)+$"
+PATTERN="^(\[(JIRA|TICKET_REF)\-[0-9]+\])?(feat|fix|docs|style|refactor|perf|test|chore|ci):\s.*$"
 
-echo "commit lint validate job starts"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo "${BLUE}================ Commit lint validate job starts ================${NC}\n\n"
 
 COMMIT_MESSAGE=$(<${1})
 
-echo $COMMIT_MESSAGE
-
 if [[ $( echo $COMMIT_MESSAGE | grep -E $PATTERN | wc -l) -eq 1 ]]
 then
-    echo "Valid commit format" 
+    echo "${GREEN}=================== Valid commit format ===================${NC}\n\n" 
     exit 0
 else 
-    echo "Invalid commit format"
+    echo "${RED}=================== Invalid commit format ===================${NC}\n\n"
     exit 1
 fi
