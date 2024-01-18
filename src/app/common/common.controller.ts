@@ -1,6 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { BaseResponse } from "src/config/dto/base.response";
+import { BaseResponse } from "src/shared/kernel/dto/base.response";
 
 @Controller()
 @ApiTags("Common")

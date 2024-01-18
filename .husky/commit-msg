@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-PATTERN="^(\[(JIRA|TICKET_REF)\-[0-9]+\])?(feat|fix|docs|style|refactor|perf|test|chore|ci):\s.*$"
+PATTERN="^(\[(JIRA|TICKET_REF)\-[0-9]+\])?(feat|fix|docs|style|ref|perf|test|chore|ci):\s.*$"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

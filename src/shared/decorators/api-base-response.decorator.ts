@@ -1,6 +1,6 @@
 import { Type, applyDecorators } from "@nestjs/common";
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
-import { BaseResponse } from "src/config/dto/base.response";
+import { BaseResponse } from "src/shared/kernel/dto/base.response";
 
 export const ApiBaseResponse = <T extends Type<any>>(data?: T | [T]) => {
 

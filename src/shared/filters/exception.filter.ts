@@ -11,7 +11,7 @@ import { classToPlain } from "class-transformer";
 import { isArray, isObject } from "class-validator";
 import { Request, Response } from "express";
 import { QueryFailedError, TypeORMError } from "typeorm";
-import { BaseResponse } from "../dto/base.response";
+import { BaseResponse } from "../kernel/dto/base.response";
 
 @Catch()
 export class CustomExceptionFilter implements ExceptionFilter {

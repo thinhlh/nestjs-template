@@ -1,9 +1,9 @@
 import { ClassSerializerInterceptor, Module, ValidationPipe } from "@nestjs/common";
 import { CommonModule } from "./common/common.module";
-import { Environment, EnvironmentType, environmentSchema } from "src/config/environment/environment";
+import { Environment, EnvironmentType, environmentSchema } from "src/shared/environment/environment";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
-import { CustomExceptionFilter } from "src/config/filters/exception.filter";
+import { CustomExceptionFilter } from "src/shared/filters/exception.filter";
 import { ProductModule } from "src/app/product/product.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CategoryModule } from "./category/category.module";
