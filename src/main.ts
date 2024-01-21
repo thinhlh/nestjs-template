@@ -3,7 +3,6 @@ import { INestApplication, VersioningType } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app/app.module";
 
-
 const createApp = () => NestFactory.create(AppModule);
 
 async function runApp(app: INestApplication) {

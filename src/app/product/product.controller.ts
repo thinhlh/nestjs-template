@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Product } from "./product.entity";
-import { CreateProductRequest } from "./create-product.request";
+import { CreateProductRequest } from "./request/create-product.request";
 import { ApiBaseResponse } from "src/shared/decorators/api-base-response.decorator";
 import { ProductService } from "./product.service";
 import { BaseResponse } from "src/shared/kernel/dto/base.response";

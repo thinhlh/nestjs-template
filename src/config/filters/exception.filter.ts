@@ -27,7 +27,7 @@ export class CustomExceptionFilter implements ExceptionFilter {
     console.log(exception);
 
     switch (exception.constructor) {
-      case AppException: 
+      case AppException:
         message = (exception as AppException).getResponse().toString();
         status = (exception as AppException).getStatus();
 
@@ -83,11 +83,7 @@ export class CustomExceptionFilter implements ExceptionFilter {
         break;
     }
 
-    const body: BaseResponse<any> = {
-      success: false,
-      message,
-      data: null,
-    };
+    const body = BaseResponse.error(message);
     response.status(status).json(body);
   }
 

@@ -9,6 +9,7 @@
 - [Commithook & commitlint](#commithook--commitlint)
 - [Error handling](#error-handling)
 - [Database migration](#database-migration)
+- [Body compression](#body-compression)
 
 ## Environment configuration
 ## Built-in exception filter
@@ -17,6 +18,7 @@
 ## Commithook & commitlint
 ## Error handling
 ## Database migration
+
 ```sh
 yarn run typeorm:migration:generate ./src/migrations/MigrationChanges # Generate migration file
 
@@ -25,10 +27,10 @@ yarn run typeorm:migration:run # Run pending migrations files
 yarn run typeorm:migration:revert # Revert migration 1 step back
 ```
 
-
 # TODO items
 - [x] Database migration
 - [x] Business Error handling
+- [ ] Sample CRUD
 - [ ] CI/CD pipeline
 - [ ] CQRS
 - [ ] Domain Driven architecture
@@ -45,4 +47,5 @@ yarn run typeorm:migration:revert # Revert migration 1 step back
 - [ ] MessageQueue
 - [ ] GraphQL
 - [ ] Monorepo
+- [ ] CMS Integration
 - [ ] High-level application architecture
